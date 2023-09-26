@@ -1,17 +1,34 @@
-// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
-// then press Enter. You can now see whitespace characters in your code.
+import java.util.Scanner;
+
 public class Main {
+    public static String calc(String input) {
+        String[] arr = input.split(" ");
+        byte first = Byte.parseByte(arr[0]);
+        byte second = Byte.parseByte(arr[2]);
+        String operation = arr[1];
+        switch (operation) {
+            case "+":
+                System.out.println(first + second);
+                break;
+            case "-":
+                System.out.println(first - second);
+                break;
+            case "/":
+                System.out.println(first / second);
+                break;
+            case "*":
+                System.out.println(first * second);
+                break;
+        }
+
+        return "";
+    }
     public static void main(String[] args) {
-        // Press Alt+Enter with your caret at the highlighted text to see how
-        // IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
-
-        // Press Shift+F10 or click the green arrow button in the gutter to run the code.
-        for (int i = 1; i <= 5; i++) {
-
-            // Press Shift+F9 to start debugging your code. We have set one breakpoint
-            // for you, but you can always add more by pressing Ctrl+F8.
-            System.out.println("i = " + i);
+        Scanner console = new Scanner(System.in);
+        String inputLine = console.nextLine();
+        while (!inputLine.equals("stop")) { //пока imputLine не равно stop
+            calc(inputLine);
+            inputLine = console.nextLine();
         }
     }
 }
