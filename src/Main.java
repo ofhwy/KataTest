@@ -24,13 +24,13 @@ class Main {
             case "-" -> first - second;
             case "/" -> first / second;
             case "*" -> first * second;
-            default -> 0;
+            default -> throw new Exception("Неверный знак");
         };
         if (isRoman && res<=0) throw new Exception("Неверный результат");
         if (isRoman) {
-           res = Integer.parseInt(Rome.getRome(res));
+            System.out.println(Rome.getRome(res));
         }
-        System.out.println(res);
+        else System.out.println(res);
     }
 
     class Rome {
