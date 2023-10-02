@@ -29,6 +29,7 @@ class Main {
             case "*" -> first * second;
             default -> 0;
         };
+        if (isRoman && res<=0) throw new Exception("Неверный результат");
         System.out.println(isRoman ? Rome.getRome(res) : res);
     }
 
