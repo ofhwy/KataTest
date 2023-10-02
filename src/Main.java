@@ -2,7 +2,7 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 class Main {
-    public static void calc(String input) throws Exception {
+    public static String calc(String input) throws Exception {
         String[] arr = input.split(" ");
 
         boolean isRoman = true;
@@ -31,6 +31,7 @@ class Main {
             System.out.println(Rome.getRome(res));
         }
         else System.out.println(res);
+        return ""+res;
     }
 
     class Rome {
@@ -41,7 +42,7 @@ class Main {
             return Arrays.asList(mini_roman).indexOf(str);
         }
 
-        public static String getRome(Integer num) {
+        static String getRome(Integer num) {
             if (num <= 10) {
                 return mini_roman[num];
             } else if (num == 100) {
