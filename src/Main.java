@@ -1,34 +1,73 @@
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
-public class Main {
-    public static String calc(String input) {
+class Main {
+
+    public static void main(String input) throws Exception {
         String[] arr = input.split(" ");
-        byte first = Byte.parseByte(arr[0]);
-        byte second = Byte.parseByte(arr[2]);
-        String operation = arr[1];
-        switch (operation) {
-            case "+":
-                System.out.println(first + second);
-                break;
-            case "-":
-                System.out.println(first - second);
-                break;
-            case "/":
-                System.out.println(first / second);
-                break;
-            case "*":
-                System.out.println(first * second);
-                break;
+
+        boolean isRoman = true;
+        int first = Rome.getInt(arr[0]);
+        int second = Rome.getInt(arr[2]);
+
+        if (first == -1 && second == -1) {
+            first = Integer.parseInt(arr[0]);
+            second = Integer.parseInt(arr[2]);
+            isRoman = false;
+        } else if (first == -1 || second == -1) {
+            throw new Exception("Неверный ввод!");
         }
 
-        return "";
+        if (first > 10 || first < 1 || second > 10 || second < 1) throw new Exception("Неверный ввод!");
+
+        int res = switch (arr[1]) {
+            case "+" -> first + second;
+            case "-" -> first - second;
+            case "/" -> first / second;
+            case "*" -> first * second;
+            default -> 0;
+        };
+        System.out.println(isRoman ? Rome.getRome(res) : res);
     }
-    public static void main(String[] args) {
+
+    class Rome {
+        static String[] lil_roman = {"", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"};
+        static Map<Integer, String> big_roman = new HashMap<Integer, String>() {{
+            put(1, "X");
+            put(2, "XX");
+            put(3, "XXX");
+            put(4, "XL");
+            put(5, "L");
+            put(6, "LX");
+            put(7, "LXX");
+            put(8, "LXXX");
+            put(9, "XC");
+        }};
+
+        static Integer getInt(String str) {
+            return Arrays.asList(lil_roman).indexOf(str);
+        }
+
+        public static String getRome(Integer num) {
+            if (num <= 10) {
+                return lil_roman[num];
+            } else if (num == 100) {
+                return "C";
+            } else {
+                return big_roman.get(num / 10) + lil_roman[num % 10];
+            }
+        }
+    }
+
+    public static void main(String[] args) throws Exception {
         Scanner console = new Scanner(System.in);
         String inputLine = console.nextLine();
-        while (!inputLine.equals("stop")) { //пока imputLine не равно stop
-            calc(inputLine);
+        while (!inputLine.equals("stop")) { //пока inputLine не равно stop
+            main(inputLine);
             inputLine = console.nextLine();
+
         }
     }
 }
