@@ -4,6 +4,9 @@ import java.util.Scanner;
 class Main {
     public static String calc(String input) throws Exception {
         String[] arr = input.split(" ");
+        if (arr.length != 3) {
+            throw new Exception("Неверный ввод!");
+        }
 
         boolean isRoman = true;
         int first = Rome.getInt(arr[0]);
